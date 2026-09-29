@@ -19,3 +19,16 @@ Back-end com duas coleções mockup JSON clientes e pedidos, CRUD, para aprender
 npm install
 npm run dev
 ```
+## Exemplos de rotas : Alterar e Excluir 
+
+Alterar Cliente 
+![Alterar](./docx/alterarcliente.png)
+
+Excluir Cliente 
+![Excluir](./docx/excluircliente.png)
+
+Alterar Pedido 
+![Alterar](./docx/alterarpedido.png)
+
+Excluir Pedido
+![Excluir](./docx/excluirpedido.png)
