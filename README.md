@@ -21,14 +21,14 @@ npm run dev
 ```
 ## Exemplos de rotas : Alterar e Excluir 
 
-Alterar Cliente 
+Alterar Cliente <br>
 ![Alterar](./docx/alterarcliente.png)
 
-Excluir Cliente 
+Excluir Cliente <br>
 ![Excluir](./docx/excluircliente.png)
 
-Alterar Pedido 
+Alterar Pedido <br>
 ![Alterar](./docx/alterarpedido.png)
 
-Excluir Pedido
+Excluir Pedido <br>
 ![Excluir](./docx/excluirpedido.png)
