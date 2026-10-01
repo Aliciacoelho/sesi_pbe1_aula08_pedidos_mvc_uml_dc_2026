@@ -24,35 +24,43 @@ const listar = (req, res) => {
 
 }
 
-const alterar = (req, res) => {
+const alterar = (req, res)=>{
+    const id = req.params.id;
+    const dados = req.body;
+    let status = 0;
 
-    const id = Number(req.params.id)
+    pedidos.forEach((pedido) => {
+        if(pedido.id == id) {
+            status = 1;
+            pedido.id = dados.id;
+            pedido.cliente_id = dados.cliente_id;
+            pedido.produto = dados.produto;
+            pedido.preco = dados.preco;
+            pedido.quantidade = dados.quantidade;
+        }
+    });
 
-    const indice = pedidos.findIndex(pedido => pedido.id === id)
+    if(status == 1){
+        res.send("Pedido alterado com sucesso !");
+    }else {
+        res.status(404).send("Pedido não encontrado");
+    }}
+const excluir = (req, res)=>{
+    const id = req.params.id;
+let status = 0;
 
-    if (indice === -1) {
-        return res.status(404).json({ mensagem: "Pedido não encontrado" })
+pedidos.forEach((pedido, indice) => {
+    if(pedido.id == id){
+        status = 1;
+    pedidos.splice(indice, 1);
     }
+});
 
-    pedidos[indice] = {
-        ...pedidos[indice],
-        ...req.body,
-        id: id
-    }
-
-    res.json(pedidos[indice])
+if(status == 1){
+    res.send("Pedido excluido com sucesso");
+}else{
+    res.status(404).send("Pedido não encontrado");
 }
-
-const excluir = (req, res) => {
-    const id = Number(req.params.id)
-    const indice = pedidos.findIndex(pedido => pedido.id === id)
-
-    if (indice === -1) {
-        return res.status(404).json({ mensagem: "Pedido não encontrado" })
-    }
-
-    pedidos.splice(indice, 1)
-    res.status(204).send()
 }
 
 module.exports = {

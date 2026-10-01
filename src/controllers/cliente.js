@@ -13,35 +13,43 @@ const listar = (req, res) => {
     res.json(clientes)
 }
 
-const alterar = (req, res) => {
-    const id = Number(req.params.id)
+const alterar = (req, res)=>{
+    const id = req.params.id;
+    const dados = req.body;
+    let status = 0;
 
-    const indice = clientes.findIndex(cliente => cliente.id === id)
+    clientes.forEach((cliente) => {
+        if(cliente.id == id) {
+            status = 1;
+            cliente.id = dados.id;
+            cliente.cpf = dados.cpf;
+            cliente.nome = dados.nome;
+        }
+    });
 
-    if (indice === -1) {
-        return res.status(404).json({ mensagem: "Cliente não encontrado" })
+    if(status == 1){
+        res.send("Cliente alterado com sucesso !");
+    }else {
+        res.status(404).send("Cliente não encontrado");
     }
-
-    clientes[indice] = {
-        ...clientes[indice],
-        ...req.body,
-        id: id
-    }
-
-    res.json(clientes[indice])
 }
 
-const excluir = (req, res) => {
+const excluir = (req, res)=>{
+    const id = req.params.id;
+    let status = 0;
 
-    const id = Number(req.params.id)
-    const indice = clientes.findIndex(cliente => cliente.id === id)
+    clientes.forEach((cliente, indice) => {
+        if(cliente.id == id){
+            status = 1;
+            clientes.splice(indice, 1);
+        }
+    });
 
-    if (indice === -1) {
-        return res.status(404).json({ mensagem: "Cliente não encontrado" })
+    if(status == 1){
+        res.send("Cliente excluido com sucesso");
+    }else{
+        res.status(404).send("Cliente não encontrado");
     }
-
-    clientes.splice(indice, 1)
-    res.status(204).send()
 }
 
 module.exports = {
